@@ -15,13 +15,6 @@ class Validator:
         except ValueError:
             raise IncorrectValueException(f'Необходимо ввести число.')
 
-    @staticmethod
-    def validateArray():
-        function_number = int(Validator.validateNumber(input()))
-        if 0 < function_number <= len(FUNCTIONS):
-            return function_number
-        else:
-            raise IncorrectValueException('Неверное введено какое-то число из массива. Попробуйте еще раз.')
 
     @staticmethod
     def validateArraySize(arr):
