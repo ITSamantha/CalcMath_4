@@ -56,6 +56,7 @@ class Terminal:
                   f'1.Аппроксимирующая функция: {results[index][0]}\n'
                   f'2. Коэффициенты:{results[index][1]}\n'
                   f'3. Среднеквадратичное отклонение: {results[index][3]}')
+
             plt.scatter(x_array, y_array, color='red', s=40, marker='o', label='f(x)')
             plt.plot(x, [results[0][1]['a'] * x + results[0][1]['b'] for x in x], color='green', label=results[0][0])
             plt.plot(x,
@@ -66,42 +67,22 @@ class Terminal:
                      [results[2][1]['a0'] + x * results[2][1]['a1'] + results[2][1]['a2'] * x ** 2 + results[2][1][
                          'a3'] * x ** 3 for x in x], '--',
                      color='black', label=results[2][0])
-            plt.plot(x, [results[3][1]['a'] * x ** results[3][1]['b'] for x in x], '--',
-                     color='pink', label=results[3][0])
-            plt.plot(x,
-                     [results[4][1]['a'] * exp(x * results[4][1]['b']) for x in x], '--',
-                     color='orange', label=results[4][0])
             plt.plot(x,
                      [results[5][1]['a'] * log(x) + results[5][1]['b'] for x in x], '--',
                      color='purple', label=results[5][0])
             plt.legend()
             plt.grid()
             plt.figure(2)
+            plt.plot(x, [results[3][1]['a'] * x ** results[3][1]['b'] for x in x], '--',
+                     color='pink', label=results[3][0])
             plt.scatter(x_array, y_array, color='red', s=40, marker='o', label='f(x)')
-            if index == 0:
-                plt.plot(x, [results[0][1]['a'] * x + results[0][1]['b'] for x in x], color='green',
-                         label=results[0][0])
-            elif index == 1:
-                plt.plot(x,
-                         [results[1][1]['a0'] + x * results[1][1]['a1'] + results[1][1]['a2'] * x ** 2 for x in x],
-                         '--',
-                         color='blue', label=results[1][0])
-            elif index == 2:
-                plt.plot(x,
-                         [results[2][1]['a0'] + x * results[2][1]['a1'] + results[2][1]['a2'] * x ** 2 + results[2][1][
-                             'a3'] * x ** 3 for x in x], '--',
-                         color='black', label=results[2][0])
-            elif index == 3:
-                plt.plot(x, [results[3][1]['a'] * x ** results[3][1]['b'] for x in x], '--',
-                         color='pink', label=results[3][0])
-            elif index == 4:
-                plt.plot(x,
-                         [results[4][1]['a'] * exp(x * results[4][1]['b']) for x in x], '--',
-                         color='orange', label=results[4][0])
-            elif index == 5:
-                plt.plot(x,
-                         [results[5][1]['a'] * log(x) + results[5][1]['b'] for x in x], '--',
-                         color='purple', label=results[5][0])
+            plt.legend()
+            plt.grid()
+            plt.figure(3)
+            plt.plot(x,
+                     [results[4][1]['a'] * exp(x * results[4][1]['b']) for x in x], '--',
+                     color='orange', label=results[4][0])
+            plt.scatter(x_array, y_array, color='red', s=40, marker='o', label='f(x)')
             plt.legend()
             plt.grid()
         except IncorrectValueException as e:
