@@ -151,7 +151,7 @@ class ApproximationFunctions(Approximation):
                 'b': b, 'S': S, 'SD': SD}
 
     def exponentialFunction(self):
-        print('\t\t\tПоказательная функция')
+        print('\t\t\tСтепенная функция')
         coefficients = self.__calculateExponentialFunctionCoefficient()
         function = f"P5(x) = {coefficients['a']}*x^({coefficients['b']})"
         self.__printCoefficients(coefficients, function)
