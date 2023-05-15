@@ -1,4 +1,6 @@
-from numpy import exp
+import math
+
+from numpy import exp, log
 
 from Approximation import Approximation
 import numpy as np
@@ -15,8 +17,8 @@ class ApproximationFunctions(Approximation):
         delta = SXX * N - SX * SX
         delta1 = SXY * N - SX * SY
         delta2 = SXX * SY - SX * SXY
-        a = round(delta1 / delta, 5)
-        b = round(delta2 / delta, 5)
+        a = delta1 / delta
+        b = delta2 / delta
         self._setPX(self._calculateLinearValues(a, b))
         self._setEpsilon(self._calculateEpsilon())
         S = self._deviationMeasure()
@@ -124,7 +126,10 @@ class ApproximationFunctions(Approximation):
 
     # Экспоненциальная
     def __calculateExponentFunctionCoefficient(self):
+        y_arr = self.getArrayY()
+        self.setArrayY([log(y) for y in y_arr])
         A, B, a, b = self.calculateLinearForOtherFunctions()
+        self.setArrayY(y_arr)
         self._setPX(self._calculateExponentValues(a, b))
         self._setEpsilon(self._calculateEpsilon())
         S = self._deviationMeasure()
@@ -140,9 +145,14 @@ class ApproximationFunctions(Approximation):
         return function, {'a': coefficients['a'], 'b': coefficients['b']}, \
             coefficients['S'], coefficients['SD']
 
-    # Показательная
+    # Cтепенная
     def __calculateExponentialFunctionCoefficient(self):
+        y_arr, x_arr = self.getArrayY(), self.getArrayX()
+        self.setArrayY([log(y) for y in y_arr])
+        self.setArrayX([log(x) for x in x_arr])
         A, B, a, b = self.calculateLinearForOtherFunctions()
+        self.setArrayY(y_arr)
+        self.setArrayX(x_arr)
         self._setPX(self._calculateExponentialValues(a, b))
         self._setEpsilon(self._calculateEpsilon())
         S = self._deviationMeasure()
@@ -160,7 +170,12 @@ class ApproximationFunctions(Approximation):
 
     # Логарифмическая
     def __calculateLogarithmFunctionCoefficient(self):
-        A, B, a, b = self.calculateLinearForOtherFunctions()
+        x_arr = self.getArrayX()
+        self.setArrayX([log(x) for x in x_arr])
+        coefficient = self.__calculateLinearFunctionCoefficient()
+        A, B = coefficient['a'], coefficient['b']
+        a, b = A, B
+        self.setArrayX(x_arr)
         self._setPX(self._calculateLogarithmValues(a, b))
         self._setEpsilon(self._calculateEpsilon())
         S = self._deviationMeasure()
@@ -186,6 +201,6 @@ class ApproximationFunctions(Approximation):
 
     def calculateLinearForOtherFunctions(self):
         coefficient = self.__calculateLinearFunctionCoefficient()
-        A, B = coefficient['a'], coefficient['b']
-        a, b = exp(A), B
+        A, B = coefficient['b'], coefficient['a']
+        a, b = math.exp(A), B
         return A, B, a, b

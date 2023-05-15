@@ -13,8 +13,14 @@ class Approximation:
     def getArrayX(self):
         return self.__x_array
 
+    def setArrayX(self, arr):
+        self.__x_array = arr
+
     def getArrayY(self):
         return self.__y_array
+
+    def setArrayY(self, arr):
+        self.__y_array = arr
 
     def getN(self):
         return self.__n
@@ -51,7 +57,6 @@ class Approximation:
 
     def _calculateExponentValues(self, a, b):
         return [a * exp(b * x) for x in self.__x_array]
-
 
     def _calculateLinearValues(self, a, b):
         return [a * x + b for x in self.__x_array]
