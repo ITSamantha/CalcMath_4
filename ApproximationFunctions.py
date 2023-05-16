@@ -68,7 +68,7 @@ class ApproximationFunctions(Approximation):
     def polynomialSecondFunction(self):
         print('\t\t\tПолиномиальная функция 2-ой степени')
         coefficients = self.__calculatePolynomialSecondFunctionCoefficient()
-        function = f"P2(x) = {coefficients['a0']} + ({coefficients['a1']}a1)+ ({coefficients['a2']}a2)"
+        function = f"P2(x) = {coefficients['a0']} + ({coefficients['a1']}x)+ ({coefficients['a2']}x^2)"
         print(f"\tПолучаем систему уравнений:\n"
               f"\t\t{coefficients['N']}a0 + {coefficients['SX']}a1 + {coefficients['SXX']}a2 = {coefficients['SY']}\n"
               f"\t\t{coefficients['SX']}a0 + {coefficients['SXX']}a1 + {coefficients['SXXX']}a2= {coefficients['SXY']}\n"
@@ -108,7 +108,7 @@ class ApproximationFunctions(Approximation):
     def polynomialThirdFunction(self):
         print('\t\t\tПолиномиальная функция 3-ей степени')
         coefficients = self.__calculatePolynomialThirdFunctionCoefficient()
-        function = f"P3(x) = {coefficients['a0']} + ({coefficients['a1']}a1)+ ({coefficients['a2']}a2) + ({coefficients['a3']}a3)"
+        function = f"P3(x) = {coefficients['a0']} + ({coefficients['a1']}x)+ ({coefficients['a2']}x^2) + ({coefficients['a3']}x^3)"
         print(f"\tПолучим систему уравнений:\n"
               f"\t\t{coefficients['N']}a0 + {coefficients['SX']}a1 + {coefficients['SXX']}a2 + {coefficients['SXXX']}a3 = {coefficients['SY']}\n"
               f"\t\t{coefficients['SX']}a0 + {coefficients['SXX']}a1 + {coefficients['SXXX']}a2 + {coefficients['SXXXX']}a3= {coefficients['SXY']}\n"
